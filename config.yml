@@ -1,0 +1,5 @@
+# bot的token,必填
+token: '6045380083:AAHODAbeaVwJ-x_7d8Qp7-cXXzZzGyTAaD4'
+
+#全局代理设置，如不需设置请留空
+proxy: ''

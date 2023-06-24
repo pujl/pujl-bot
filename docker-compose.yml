@@ -1,0 +1,16 @@
+version: "3"
+services:
+  kmua:
+    image: ghcr.io/pujl/pujl-bot:v2
+    container_name: pujl-v2-main
+    init: true
+    volumes:
+      - ./data:/pujl/data
+      - ./logs:/pujl/logs
+    environment:
+      - TZ=Asia/Shanghai
+      - PUJL_TOKEN="你的token"
+      - PUJL_OWNERS=[]
+      - PUJL_PICKLE_PATH="./data/data.pickle"
+      - PUJL_LOG_LEVEL="INFO"
+      - PUJL_RANDOM_FILTER=0.1
