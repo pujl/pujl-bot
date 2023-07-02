@@ -21,6 +21,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = '你好~我是pujl编写的bot，目前还在测试阶段'
     await context.bot.send_message(chat_id=update.effective_chat.id,text=text)
 
+async def echo(update: Update,context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id,text=update.message.text)
+
 async def set_right(update: Update, context: ContextTypes.DEFAULT_TYPE):
     '''设置成员权限和头衔，目前该功能不好用，或者不会用'''
     chat_id = update.effective_chat.id
@@ -56,7 +59,8 @@ def run():
     filter_ohayo = filters.Regex('早安|早上好|哦哈哟|ohayo')
     ohayo_handler = MessageHandler(filter_ohayo, ohayo)
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
-
+    echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND),echo)
+    
     # 构建 bot
     TOKEN=config['token']
     application = ApplicationBuilder().token(TOKEN).build()
@@ -64,6 +68,7 @@ def run():
     application.add_handler(start_handler)
     application.add_handler(set_right_handler)
     application.add_handler(ohayo_handler)
+    application.add_handler(echo_handler)
     application.add_handler(unknown_handler)
     # run!
     application.run_polling()
